@@ -1,7 +1,7 @@
 # Lab 18: Production RAG Pipeline
 
 **AICB-P2T3 · Ngày 18 · Production RAG**  
-**Giảng viên:** M.Sc Trần Minh Tú · **Thời gian:** 2 giờ
+**Giảng viên:** M.Sc Trần Minh Tú · **Thời gian:** 2.5 giờ
 
 ---
 
@@ -11,8 +11,8 @@ Lab gồm **2 phần**:
 
 | Phần | Hình thức | Thời gian | Mô tả |
 |------|-----------|-----------|-------|
-| **Phần A** | Cá nhân | 1.5 giờ | Implement 1 trong 4 modules |
-| **Phần B** | Nhóm (3–4 người) | 30 phút | Ghép modules → full pipeline → eval → present |
+| **Phần A** | Cá nhân | 1.5 giờ | Implement 1 trong 5 modules |
+| **Phần B** | Nhóm (3–4 người) | 1 giờ | Ghép modules → full pipeline → eval → present |
 
 ```
   Cá nhân                         Nhóm
@@ -23,7 +23,9 @@ Lab gồm **2 phần**:
   ├────────────┤  │    │  pipeline.py + RAGAS eval     │
   │ M3 Rerank  │──┤    │  + failure analysis           │
   ├────────────┤  │    └──────────────────────────────┘
-  │ M4 Eval    │──┘
+  │ M4 Eval    │──┤
+  ├────────────┤  │
+  │ M5 Enrich  │──┘
   └────────────┘
 ```
 
@@ -57,28 +59,34 @@ lab18-production-rag/
 ├── check_lab.py                # Kiểm tra định dạng trước khi nộp
 ├── naive_baseline.py           # Baseline (chạy trước)
 ├── config.py                   # Shared config
-├── requirements.txt            # Dependencies (pinned)
+├── requirements.txt            # Dependencies
 ├── docker-compose.yml          # Qdrant local
 ├── .env.example                # API keys template
 │
-├── data/                       # Sample corpus tiếng Việt
-│   ├── sample_01.md
-│   ├── sample_02.md
-│   └── sample_03.md
-├── test_set.json               # 20 Q&A pairs
+├── data/                       # Corpus tiếng Việt (TaiLieuBot)
+│   ├── chinh_sach_nhan_su.md   # Nghỉ phép, thử việc, giờ làm
+│   ├── chinh_sach_cntt.md      # Mật khẩu, VPN, MFA, bảo mật
+│   ├── phuc_loi_luong_thuong.md # Lương, thưởng, bảo hiểm, phụ cấp
+│   ├── quy_dinh_chung.md       # Trang phục, công tác, WFH
+│   ├── so_tay_an_toan.pdf      # An toàn PCCC + sơ cứu (PDF text)
+│   ├── BCTC.pdf                # Báo cáo tài chính (scan, cần OCR)
+│   └── Nghi_dinh_13-2023.pdf   # Nghị định BVDL (scan, cần OCR)
+├── test_set.json               # 25 Q&A pairs
 │
 ├── src/                        # ★ Scaffold code (có TODO markers)
 │   ├── m1_chunking.py          # Module 1: Chunking
 │   ├── m2_search.py            # Module 2: Hybrid Search
 │   ├── m3_rerank.py            # Module 3: Reranking
 │   ├── m4_eval.py              # Module 4: Evaluation
+│   ├── m5_enrichment.py        # Module 5: Enrichment Pipeline
 │   └── pipeline.py             # Ghép nhóm
 │
 ├── tests/                      # Auto-grading
 │   ├── test_m1.py
 │   ├── test_m2.py
 │   ├── test_m3.py
-│   └── test_m4.py
+│   ├── test_m4.py
+│   └── test_m5.py
 │
 ├── analysis/                   # ★ Deliverable
 │   ├── failure_analysis.md     # Phân tích failures (nhóm)

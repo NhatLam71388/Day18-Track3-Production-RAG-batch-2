@@ -22,12 +22,34 @@ class Chunk:
     parent_id: str | None = None
 
 
+def _extract_pdf_text(path: str) -> str:
+    """Extract text layer từ PDF. Trả về "" nếu PDF là scan ảnh (không có text)."""
+    from pypdf import PdfReader
+
+    reader = PdfReader(path)
+    pages = [page.extract_text() or "" for page in reader.pages]
+    return "\n\n".join(pages).strip()
+
+
 def load_documents(data_dir: str = DATA_DIR) -> list[dict]:
-    """Load all markdown/text files from data/. (Đã implement sẵn)"""
+    """Load tất cả markdown và PDF (có text layer) từ data/. (Đã implement sẵn)
+
+    - .md: đọc trực tiếp.
+    - .pdf: trích text layer bằng pypdf. PDF scan ảnh (không có text) bị bỏ qua
+      kèm cảnh báo — RAG text-based không xử lý được scan nếu chưa OCR.
+    """
     docs = []
     for fp in sorted(glob.glob(os.path.join(data_dir, "*.md"))):
         with open(fp, encoding="utf-8") as f:
             docs.append({"text": f.read(), "metadata": {"source": os.path.basename(fp)}})
+
+    for fp in sorted(glob.glob(os.path.join(data_dir, "*.pdf"))):
+        text = _extract_pdf_text(fp)
+        if text:
+            docs.append({"text": text, "metadata": {"source": os.path.basename(fp)}})
+        else:
+            print(f"  ⚠️  Bỏ qua {os.path.basename(fp)}: PDF scan ảnh, không có text layer (cần OCR).")
+
     return docs
 
 
