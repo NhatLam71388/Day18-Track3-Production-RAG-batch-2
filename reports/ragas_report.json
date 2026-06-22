@@ -1,0 +1,181 @@
+{
+  "aggregate": {
+    "faithfulness": 0.9167,
+    "answer_relevancy": 0.627,
+    "context_precision": 0.9042,
+    "context_recall": 0.8167
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Nếu cần mua một chiếc laptop 30 triệu cho nhân viên mới, ai phê duyệt và cần gì từ phòng CNTT?",
+      "answer": "Dựa trên context đã cung cấp:\n\n*   **Yêu cầu từ phòng CNTT:** Cần có xác nhận của phòng CNTT về cấu hình kỹ thuật trước khi đề xuất.\n*   **Người phê duyệt:** Không tìm thấy (Context chỉ cung cấp thông tin phê duyệt cho đơn hàng mua sắm dưới 5.000.000 VNĐ; thông tin phê duyệt từ 5.000.000 VNĐ trở lên chỉ được đề cập trong quy trình tạm ứng, không phải quy trình mua sắm).",
+      "ground_truth": "Laptop 30 triệu nằm trong khoảng 5-50 triệu nên cần Giám đốc phòng ban (Director) phê duyệt. Ngoài ra, mua sắm thiết bị CNTT cần có xác nhận cấu hình kỹ thuật từ phòng CNTT trước khi đề xuất. Cần đính kèm ít nhất 3 báo giá vì trên 10 triệu.",
+      "worst_metric": "answer_relevancy",
+      "worst_score": 0.0,
+      "avg_score": 0.5417,
+      "score": 0.5417,
+      "metrics": {
+        "faithfulness": 0.8333,
+        "answer_relevancy": 0.0,
+        "context_precision": 1.0,
+        "context_recall": 0.3333
+      },
+      "diagnosis": "Câu trả lời lệch khỏi câu hỏi",
+      "suggested_fix": "Cải thiện prompt template, làm rõ instruction"
+    },
+    {
+      "question": "Thông tin lương thuộc cấp độ phân loại dữ liệu nào?",
+      "answer": "Thông tin lương thuộc cấp độ 3 (**Bí mật**).",
+      "ground_truth": "Theo quy chế chi trả lương, thông tin lương được phân loại là dữ liệu Bí mật, cấm chia sẻ với đồng nghiệp. Theo chính sách phân loại dữ liệu, dữ liệu Bí mật (cấp 3) phải mã hóa khi truyền và hạn chế truy cập theo need-to-know.",
+      "worst_metric": "answer_relevancy",
+      "worst_score": 0.0,
+      "avg_score": 0.625,
+      "score": 0.625,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Câu trả lời lệch khỏi câu hỏi",
+      "suggested_fix": "Cải thiện prompt template, làm rõ instruction"
+    },
+    {
+      "question": "Nhân viên tạm ứng 15 triệu, sau 20 ngày mới thanh toán. Bị phạt bao nhiêu?",
+      "answer": "Bị phạt **2%/tháng** trên số tiền chưa hoàn ứng (tương đương **300.000 VNĐ** đối với khoản tạm ứng 15 triệu).",
+      "ground_truth": "Thời hạn thanh toán là 15 ngày. Quá hạn 5 ngày, bị tính phí 2%/tháng trên 15.000.000 VNĐ = 300.000 VNĐ/tháng (tính pro-rata khoảng 50.000 VNĐ cho 5 ngày).",
+      "worst_metric": "faithfulness",
+      "worst_score": 0.5,
+      "avg_score": 0.6453,
+      "score": 0.6453,
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.7479,
+        "context_precision": 0.8333,
+        "context_recall": 0.5
+      },
+      "diagnosis": "LLM hallucinating — câu trả lời không bám context",
+      "suggested_fix": "Siết prompt 'chỉ dùng context', giảm temperature"
+    },
+    {
+      "question": "Lương thử việc của nhân viên Junior mức cao nhất là bao nhiêu?",
+      "answer": "17.000.000 VNĐ.",
+      "ground_truth": "Junior cao nhất là 20.000.000 VNĐ/tháng. Lương thử việc = 85% x 20.000.000 = 17.000.000 VNĐ/tháng.",
+      "worst_metric": "answer_relevancy",
+      "worst_score": 0.3094,
+      "avg_score": 0.6607,
+      "score": 0.6607,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.3094,
+        "context_precision": 0.3333,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Câu trả lời lệch khỏi câu hỏi",
+      "suggested_fix": "Cải thiện prompt template, làm rõ instruction"
+    },
+    {
+      "question": "Nhân viên được tài trợ khóa học 25 triệu, nghỉ việc sau 8 tháng hoàn thành khóa học. Phải hoàn trả bao nhiêu?",
+      "answer": "Nhân viên phải hoàn trả **25.000.000 VNĐ** (tương đương 100% chi phí đào tạo đã được tài trợ).",
+      "ground_truth": "Nhân viên phải cam kết làm việc ít nhất 1 năm sau khi hoàn thành khóa học. Nghỉ sau 8 tháng là trước hạn cam kết, phải hoàn trả 100% chi phí tức 25.000.000 VNĐ.",
+      "worst_metric": "faithfulness",
+      "worst_score": 0.0,
+      "avg_score": 0.7007,
+      "score": 0.7007,
+      "metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.8027,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "diagnosis": "LLM hallucinating — câu trả lời không bám context",
+      "suggested_fix": "Siết prompt 'chỉ dùng context', giảm temperature"
+    },
+    {
+      "question": "Nghỉ phép không lương 20 ngày cần ai phê duyệt?",
+      "answer": "Giám đốc điều hành (CEO).",
+      "ground_truth": "Nghỉ 16-30 ngày cần phê duyệt của Giám đốc điều hành (CEO). Lưu ý: nghỉ trên 14 ngày không lương, nhân viên phải tự đóng phần bảo hiểm của mình.",
+      "worst_metric": "answer_relevancy",
+      "worst_score": 0.4864,
+      "avg_score": 0.7466,
+      "score": 0.7466,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.4864,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Câu trả lời lệch khỏi câu hỏi",
+      "suggested_fix": "Cải thiện prompt template, làm rõ instruction"
+    },
+    {
+      "question": "Phụ cấp ăn trưa hàng tháng là bao nhiêu?",
+      "answer": "1.000.000 VNĐ/tháng.",
+      "ground_truth": "Phụ cấp ăn trưa là 1.000.000 VNĐ/tháng, chi trả cùng kỳ lương.",
+      "worst_metric": "answer_relevancy",
+      "worst_score": 0.049,
+      "avg_score": 0.7623,
+      "score": 0.7623,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.049,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Câu trả lời lệch khỏi câu hỏi",
+      "suggested_fix": "Cải thiện prompt template, làm rõ instruction"
+    },
+    {
+      "question": "Có cần kích hoạt xác thực đa yếu tố (MFA) không?",
+      "answer": "Có, tất cả nhân viên **bắt buộc** kích hoạt MFA cho tài khoản email, VPN và các hệ thống nội bộ.",
+      "ground_truth": "Có, theo chính sách mật khẩu v2.0 hiện hành, tất cả nhân viên bắt buộc kích hoạt MFA cho email, VPN và hệ thống nội bộ. Chính sách cũ v1.0 không yêu cầu MFA.",
+      "worst_metric": "context_recall",
+      "worst_score": 0.5,
+      "avg_score": 0.7837,
+      "score": 0.7837,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6348,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Thiếu chunk liên quan trong context",
+      "suggested_fix": "Cải thiện chunking, thêm BM25/hybrid, tăng top_k"
+    },
+    {
+      "question": "Nhân viên được nghỉ bao nhiêu ngày phép năm?",
+      "answer": "- Phiên bản 2023: 12 ngày phép năm.\n- Phiên bản 2024: 15 ngày phép năm.",
+      "ground_truth": "Theo chính sách hiện hành (v2024), nhân viên được nghỉ 15 ngày phép năm có lương. Chính sách cũ (v2023) là 12 ngày nhưng đã bị thay thế.",
+      "worst_metric": "context_precision",
+      "worst_score": 0.5833,
+      "avg_score": 0.8084,
+      "score": 0.8084,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6501,
+        "context_precision": 0.5833,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Quá nhiều chunk nhiễu trong context",
+      "suggested_fix": "Thêm reranking hoặc metadata filter"
+    },
+    {
+      "question": "Một nhân viên Senior có 9 năm thâm niên được nghỉ bao nhiêu ngày phép năm và lương trong khoảng nào?",
+      "answer": "- Số ngày phép năm: 18 ngày (15 + 3).\n- Khoảng lương: Không tìm thấy.",
+      "ground_truth": "Theo chính sách v2024: 15 ngày cơ bản + 3 ngày thâm niên (9÷3=3) = 18 ngày phép. Lương Senior (P3-P4): 20-35 triệu VNĐ/tháng.",
+      "worst_metric": "context_recall",
+      "worst_score": 0.5,
+      "avg_score": 0.815,
+      "score": 0.815,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.76,
+        "context_precision": 1.0,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Thiếu chunk liên quan trong context",
+      "suggested_fix": "Cải thiện chunking, thêm BM25/hybrid, tăng top_k"
+    }
+  ]
+}

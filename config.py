@@ -5,8 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- API Keys ---
+# --- API Keys / LLM Gateway ---
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+# OpenAI-compatible gateway base URL (AntcoAI). openai SDK also reads this from env.
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "")
+# Chat model served by the gateway (e.g. gemini-3-flash). Centralised here.
+LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 
 # --- Qdrant ---
 QDRANT_HOST = "localhost"
